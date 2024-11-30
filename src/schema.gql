@@ -1,0 +1,58 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type User {
+  id: Int!
+  name: String!
+  email: String!
+  phone: String!
+  role: UserRole!
+  created_at: DateTime
+  updated_at: DateTime
+}
+
+"""The roles available for a user"""
+enum UserRole {
+  """Standard user role"""
+  HOST
+
+  """Guest role"""
+  GUEST
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type LoginResponse {
+  accessToken: String!
+  id: Int!
+  role: String!
+  name: String!
+  expiresIn: Float
+}
+
+type Query {
+  getUserById(id: Int!): User!
+}
+
+type Mutation {
+  removeUser(id: Int!): Float!
+  register(userInput: CreateUserInput!): User!
+  login(loginInput: UserLoginInput!): LoginResponse!
+}
+
+input CreateUserInput {
+  name: String!
+  email: String!
+  phone: String!
+  role: UserRole!
+  password: String!
+}
+
+input UserLoginInput {
+  email: String!
+  password: String!
+}
